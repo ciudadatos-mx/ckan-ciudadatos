@@ -8,6 +8,8 @@ USER root
 RUN apt-get update && \
     apt-get install -y python-dev-is-python3 libxml2-dev libxslt1-dev libgeos-c1v5
 
+RUN pip3 install -e 'git+https://github.com/ckan/ckanext-harvest.git@master#egg=ckanext-harvest' && \
+    pip3 install -r ${APP_DIR}/src/ckanext-harvest/pip-requirements.txt
 RUN pip install -e 'git+https://github.com/qld-gov-au/ckanext-s3filestore.git#egg=ckanext-s3filestore'
 RUN pip install -r ${APP_DIR}/src/ckanext-s3filestore/requirements.txt
 RUN pip install -e "git+https://github.com/davidread/ckanext-hierarchy.git#egg=ckanext-hierarchy" && \
