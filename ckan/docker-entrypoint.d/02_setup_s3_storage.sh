@@ -13,6 +13,8 @@ if [[ $CKAN__PLUGINS == *"s3filestore"* ]]; then
    ckan config-tool $CKAN_INI "ckanext.s3filestore.aws_secret_access_key=${S3_SECRET_ACCESS_KEY}"
    echo "Set up ckanext.s3filestore.host_name in the CKAN config file"
    ckan config-tool $CKAN_INI "ckanext.s3filestore.host_name=${S3_HOST_NAME}"
+
+   ckan config-tool $CKAN_INI "ckanext.s3filestore.filesystem_download_fallback = false"
 else
    echo "Not configuring s3filestore"
 fi
