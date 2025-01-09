@@ -10,12 +10,8 @@ RUN apt-get update && \
 
 RUN pip install -e 'git+https://github.com/qld-gov-au/ckanext-s3filestore.git#egg=ckanext-s3filestore'
 RUN pip install -r ${APP_DIR}/src/ckanext-s3filestore/requirements.txt
-
 RUN pip install -e "git+https://github.com/davidread/ckanext-hierarchy.git#egg=ckanext-hierarchy" && \
     pip install -r ${APP_DIR}/src/ckanext-hierarchy/requirements.txt
-
-RUN pip install -e 'git+https://github.com/ckan/ckanext-pages.git#egg=ckanext-pages'
-
 RUN pip install -e "git+https://github.com/ckan/ckanext-spatial.git#egg=ckanext-spatial" && \
     pip install -r ${APP_DIR}/src/ckanext-spatial/pip-requirements.txt && \
     pip install ckanext-geoview 
