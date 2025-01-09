@@ -98,6 +98,16 @@ Use this mode if you are making code changes to CKAN and either creating new ext
 
 To develop local extensions use the `docker-compose.dev.yml` file with help from the scripts under `bin`:
 
+dev script | description
+--- | ---
+`bin/ckan …` | exec `ckan` cli within the ckan-dev container
+`bin/compose …` | dev docker compose commands
+`bin/generate_extension` | generate extension in `src` directory
+`bin/install_src` | install all extensions from `src` directory (ckan-dev does not need to be running)
+`bin/reload` | reload ckan within the ckan-dev container without restarting
+`bin/restart` | shut down and restart the whole ckan-dev container (use `bin/compose up -d` instead to reload new values from .env)
+`bin/shell` | exec bash prompt within the ckan-dev container
+
 To build the images:
 
 	bin/compose build
@@ -323,19 +333,18 @@ For convenience the CKAN_SITE_URL parameter should be set in the .env file. For 
 
 1. Create a new user from the Docker host, for example to create a new user called 'admin'
 
-   `docker exec -it <container-id> ckan -c ckan.ini user add admin email=admin@localhost`
+   `docker compose exec ckan ckan user add admin email=admin@localhost`
+
+   To set this user as a sysadmin run
+
+   `docker compose exec ckan ckan sysadmin add admin`
 
    To delete the 'admin' user
 
-   `docker exec -it <container-id> ckan -c ckan.ini user remove admin`
+   `docker compose exec ckan ckan user remove admin`
 
-2. Create a new user from within the ckan container. You will need to get a session on the running container
+   In development mode use `bin/ckan` instead of `docker compose exec ckan ckan` for the above commands.
 
-   `ckan -c ckan.ini user add admin email=admin@localhost`
-
-   To delete the 'admin' user
-
-   `ckan -c ckan.ini user remove admin`
 
 ## 12. Changing the base image
 
